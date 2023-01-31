@@ -1,0 +1,89 @@
+.team-card {
+  border: 1px solid gray;
+  padding: 10px;
+  min-height: fit-content;
+  width: 430px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+
+  &__container-name {
+    display: grid;
+    grid-template-columns: auto min-content;
+    grid-template-rows: repeat(2, auto);
+    gap: 0;
+    grid-template-areas:
+    "teamName untrackedTeam"
+    "teamConference untrackedTeam";
+
+    &__team-name { grid-area: teamName; }
+    &__team-conference { grid-area: teamConference; }
+    &__untracked-team {
+      grid-area: untrackedTeam;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  &__separation-line {
+    border-top: 1px solid gray;
+  }
+
+  &__container-games-logo {
+    display: flex;
+    min-width: 420px;
+    margin-top: 15px;
+
+    &__box {
+      width: 50%;
+    }
+  }
+
+  &__container-circles {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  &__circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 5px;
+
+    &__win {
+      background-color: green;
+    }
+
+    &__lose {
+      background-color: red;
+    }
+  }
+
+  &__circle + &__circle {
+    margin-left: 5px;
+  }
+
+  &__circle:nth-child(6n + 1) {
+    margin-left: 0 !important;
+  }
+
+  &__btn-x {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: bold;
+  }
+}
+
+p {
+  margin: 10px 0;
+}

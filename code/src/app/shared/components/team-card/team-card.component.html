@@ -1,0 +1,66 @@
+<div class="team-card">
+  <!-- Team Info START -->
+  <div class="team-card__container-name">
+    <div class="team-card__container-name__team-name">
+      <p style="font-size: x-large; font-weight: bold">{{ teamInfo?.full_name }} [{{ teamInfo?.abbreviation }}]</p>
+    </div>
+    <div class="team-card__container-name__team-conference">
+      <p>{{ teamInfo?.conference }}</p>
+    </div>
+    <div *ngIf="!showGamesScore"
+         class="team-card__container-name__untracked-team">
+      <button class="team-card__btn-x"
+              [id]="'remove' + teamInfo!.abbreviation"
+              (click)="notTrackTeam(teamInfo!.id)">X</button>
+    </div>
+  </div>
+  <!-- Team Info END -->
+
+  <div class="team-card__separation-line"></div>
+
+  <!-- Team Win/Lost START -->
+  <div *ngIf="!showGamesScore; else gamesScore" class="team-card__container-games-logo">
+    <div class="team-card__container-games-logo__box">
+      <p>Results of past 12 days:</p>
+      <div class="team-card__container-circles">
+        <div *ngFor="let score of winLoseGames"
+             class="team-card__circle"
+             [ngClass]="{'team-card__circle__win': score === 'W', 'team-card__circle__lose': score === 'L'}">
+          {{ score }}
+        </div>
+      </div>
+      <p>Avg points scored: <span style="font-weight: bold;">{{ avgPointsScored }}</span></p>
+      <p>Avg points conceded: <span style="font-weight: bold;">{{ avgPointsConceded }}</span></p>
+    </div>
+
+    <div class="team-card__container-games-logo__box">
+      <img alt="team-logo" [attr.src]="LOGO_URL + teamInfo?.abbreviation + '.png'" style="max-height: 200px;">
+    </div>
+  </div>
+  <!-- Team Win/Lost END -->
+
+  <!-- Team Game Scores START -->
+  <ng-template #gamesScore>
+    <div class="team-card__container-games-logo__box">
+      <p>Scores of past 12 days:</p>
+      <p *ngFor="let gameScore of gamesScores">
+        <span style="font-weight: bold;">{{ gameScore.home_team.abbreviation }}</span>
+        <span> {{ gameScore.home_team_score }} - {{ gameScore.visitor_team_score }} </span>
+        <span style="font-weight: bold;">{{ gameScore.visitor_team.abbreviation }}</span>
+      </p>
+    </div>
+  </ng-template>
+  <!-- Team Game Scores END -->
+
+  <!-- Buttons to see results / Go back to Team list START -->
+  <ng-container>
+    <button *ngIf="!showGamesScore; else goBackHome"
+            type="button" class="btn btn-primary" [id]="'results' + teamInfo!.abbreviation"
+            (click)="seeGameResults(teamInfo!.id)">See game results > ></button>
+    <ng-template #goBackHome>
+      <button type="button" class="btn btn-primary" id="backBtn"
+              (click)="goBackAllTeams()">< < Back to all team stats</button>
+    </ng-template>
+  </ng-container>
+  <!-- Buttons to see results / Go back to Team list END -->
+</div>

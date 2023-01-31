@@ -1,0 +1,27 @@
+<div class="home">
+  <!-- Select Team Form START -->
+  <form [formGroup]="selectTeamForm!" (submit)="trackTeam()">
+    <select formControlName="selectedTeam" id="teamInput">
+      <option [value]="null" disabled>Select Team</option>
+      <option *ngFor="let team of teamsList" [value]="team.id" [disabled]="isAlreadySelected(team.id)">
+        {{ team.full_name }}
+      </option>
+    </select>
+    <button type="submit" class="btn btn-secondary" style="margin-left: 10px;"
+            id="trackBtn">Track Team</button>
+  </form>
+  <!-- Select Team Form END -->
+
+  <!-- Tracked Teams START -->
+  <div class="home__tracked-teams-container">
+    <ng-container *ngFor="let team of trackedTeams">
+      <app-team-card
+        [teamInfo]="team.team"
+        [gamesScores]="team.games"
+        [showGamesScore]="false"
+        (onNotTrackTeamEmitter)="removeFromTrackedTeams($event)">
+      </app-team-card>
+    </ng-container>
+  </div>
+  <!-- Tracked Teams END -->
+</div>

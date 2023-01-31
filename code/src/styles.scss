@@ -1,0 +1,21 @@
+.btn {
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+
+  &-primary {
+    background-color: green;
+  }
+  &-secondary {
+    background-color: blue;
+  }
+}
+
+select {
+  padding: 15px;
+}
